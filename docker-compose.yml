@@ -1,0 +1,64 @@
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: mobile_api_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-mobile_api}
+      MYSQL_USER: ${MYSQL_USER:-app_user}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-app_pass}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+
+  ts-api:
+    build:
+      context: ./ts-api
+    container_name: mobile_api_ts
+    restart: unless-stopped
+    environment:
+      PORT: ${TS_API_PORT:-3000}
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: ${MYSQL_DATABASE:-mobile_api}
+      DB_USER: ${MYSQL_USER:-app_user}
+      DB_PASSWORD: ${MYSQL_PASSWORD:-app_pass}
+      JWT_SECRET: replace_me
+    ports:
+      - "${TS_API_PORT:-3000}:3000"
+    depends_on:
+      - mysql
+
+  php-api:
+    build:
+      context: ./php-api
+    container_name: mobile_api_php
+    restart: unless-stopped
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: ${MYSQL_DATABASE:-mobile_api}
+      DB_USER: ${MYSQL_USER:-app_user}
+      DB_PASSWORD: ${MYSQL_PASSWORD:-app_pass}
+      APP_ENV: local
+    ports:
+      - "${PHP_API_PORT:-8080}:80"
+    depends_on:
+      - mysql
+
+  web-ui:
+    build:
+      context: ./web-ui
+    container_name: mobile_api_ui
+    restart: unless-stopped
+    ports:
+      - "5173:80"
+    depends_on:
+      - ts-api
+      - php-api
+
+volumes:
+  mysql_data:

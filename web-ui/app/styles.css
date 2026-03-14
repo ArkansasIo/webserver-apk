@@ -1,0 +1,117 @@
+:root {
+  color-scheme: dark;
+  font-family: Inter, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #0f1115;
+  color: #e8eaed;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 100vh;
+}
+
+.sidebar {
+  border-right: 1px solid #23262f;
+  padding: 20px;
+  background: #141821;
+}
+
+.sidebar h1 {
+  margin: 0 0 16px;
+  font-size: 1.4rem;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.menu-btn {
+  background: #1d2430;
+  color: #e8eaed;
+  border: 1px solid #2d3542;
+  padding: 10px 12px;
+  text-align: left;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.menu-btn.active {
+  background: #263247;
+  border-color: #3a4c6c;
+}
+
+.content {
+  padding: 24px;
+}
+
+.section {
+  display: none;
+}
+
+.section.active {
+  display: block;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: #151b26;
+  border: 1px solid #283142;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.inline-actions {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+form {
+  display: grid;
+  gap: 10px;
+}
+
+label {
+  display: grid;
+  gap: 6px;
+}
+
+input,
+button {
+  padding: 9px 10px;
+  border-radius: 8px;
+  border: 1px solid #374153;
+  background: #11161f;
+  color: #e8eaed;
+}
+
+button {
+  background: #22324d;
+  cursor: pointer;
+}
+
+pre {
+  margin-top: 12px;
+  border: 1px solid #293447;
+  border-radius: 8px;
+  background: #0f141d;
+  padding: 12px;
+  min-height: 90px;
+  overflow: auto;
+}

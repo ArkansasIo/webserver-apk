@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API App GUI</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <h1>API App</h1>
+        <nav>
+          <button class="menu-btn active" data-section="dashboard">Dashboard</button>
+          <button class="menu-btn" data-section="users">Users</button>
+          <button class="menu-btn" data-section="auth">Auth</button>
+          <button class="menu-btn" data-section="options">Options</button>
+          <button class="menu-btn" data-section="settings">Settings</button>
+        </nav>
+      </aside>
+
+      <main class="content">
+        <section id="dashboard" class="section active">
+          <h2>Main Menu: Dashboard</h2>
+          <div class="grid">
+            <article class="card">
+              <h3>Sub Menu: Service Health</h3>
+              <div class="inline-actions">
+                <button id="checkTsHealth">Check TS API</button>
+                <button id="checkPhpHealth">Check PHP API</button>
+              </div>
+              <pre id="healthOutput">No checks run yet.</pre>
+            </article>
+          </div>
+        </section>
+
+        <section id="users" class="section">
+          <h2>Main Menu: Users</h2>
+          <div class="grid">
+            <article class="card">
+              <h3>Sub Menu: User List</h3>
+              <button id="loadUsers">Load Users</button>
+              <pre id="usersOutput">No data loaded yet.</pre>
+            </article>
+            <article class="card">
+              <h3>Sub Menu: Create User</h3>
+              <form id="createUserForm">
+                <input name="email" type="email" placeholder="email" required />
+                <input name="name" type="text" placeholder="name" required />
+                <input name="password" type="text" placeholder="password" required />
+                <button type="submit">Create</button>
+              </form>
+              <pre id="createUserOutput">Submit to create a user.</pre>
+            </article>
+          </div>
+        </section>
+
+        <section id="auth" class="section">
+          <h2>Main Menu: Auth</h2>
+          <article class="card">
+            <h3>Sub Menu: Login</h3>
+            <form id="loginForm">
+              <input name="email" type="email" placeholder="email" required />
+              <input name="password" type="text" placeholder="password" required />
+              <button type="submit">Login</button>
+            </form>
+            <pre id="loginOutput">Login result will appear here.</pre>
+          </article>
+        </section>
+
+        <section id="options" class="section">
+          <h2>Main Menu: Options</h2>
+          <article class="card">
+            <h3>Sub Menu: API Source</h3>
+            <label>
+              <input type="radio" name="apiSource" value="ts" checked />
+              Use TypeScript API
+            </label>
+            <label>
+              <input type="radio" name="apiSource" value="php" />
+              Use PHP API
+            </label>
+            <label>
+              <input type="checkbox" id="prettyJson" checked />
+              Pretty JSON output
+            </label>
+          </article>
+        </section>
+
+        <section id="settings" class="section">
+          <h2>Main Menu: Settings</h2>
+          <article class="card">
+            <h3>Sub Menu: Endpoint Settings</h3>
+            <form id="settingsForm">
+              <label>
+                TypeScript API URL
+                <input id="tsBase" type="text" value="http://localhost:3000" />
+              </label>
+              <label>
+                PHP API URL
+                <input id="phpBase" type="text" value="http://localhost:8080" />
+              </label>
+              <button type="submit">Save Settings</button>
+            </form>
+            <pre id="settingsOutput">Settings not changed.</pre>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+  </html>

@@ -1,0 +1,94 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Compose Up",
+			"type": "shell",
+			"command": "docker",
+			"args": [
+				"compose",
+				"up",
+				"--build",
+				"-d"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Compose Down",
+			"type": "shell",
+			"command": "docker",
+			"args": [
+				"compose",
+				"down"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Build Android APK",
+			"type": "shell",
+			"command": "android-app\\gradlew.bat",
+			"args": [
+				"-p",
+				"android-app",
+				"assembleRelease"
+			],
+			"isBackground": false,
+			"group": "build"
+		},
+		{
+			"label": "Build Android APK (Debug)",
+			"type": "shell",
+			"command": "android-app\\gradlew.bat",
+			"args": [
+				"-p",
+				"android-app",
+				"assembleDebug"
+			],
+			"isBackground": false,
+			"group": "build"
+		},
+		{
+			"label": "Bootstrap Gradle Wrapper",
+			"type": "shell",
+			"command": "gradle",
+			"args": [
+				"-p",
+				"android-app",
+				"wrapper",
+				"--gradle-version",
+				"8.10.2"
+			],
+			"isBackground": false,
+			"group": "build"
+		},
+		{
+			"label": "Build Full Webserver APK",
+			"type": "shell",
+			"command": "build-full-apk.bat",
+			"isBackground": false,
+			"group": "build"
+		},
+		{
+			"label": "Full Push GitHub",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/c",
+				"git init && git add . && git commit -m \"Initial webserver APK + API + CI setup\" && git branch -M main && git remote remove origin 2>nul || ver>nul && git remote add origin https://github.com/ArkansasIo/webserver-apk.git && git push -u origin main"
+			],
+			"isBackground": false,
+			"group": "build"
+		},
+		{
+			"label": "One-shot GitHub Push",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/c",
+				"git init && git add . && git commit -m \"Initial webserver APK + API + CI setup\" && git branch -M main && (git remote remove origin 2>nul || ver>nul) && git remote add origin https://github.com/ArkansasIo/webserver-apk.git && git push -u origin main"
+			],
+			"isBackground": false,
+			"group": "build"
+		}
+	]
+}

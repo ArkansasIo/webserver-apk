@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+
+APP_HOME=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+WRAPPER_JAR="$APP_HOME/gradle/wrapper/gradle-wrapper.jar"
+
+if [ -f "$WRAPPER_JAR" ]; then
+  exec java -classpath "$WRAPPER_JAR" org.gradle.wrapper.GradleWrapperMain "$@"
+fi
+
+if command -v gradle >/dev/null 2>&1; then
+  echo "gradle-wrapper.jar not found, using system Gradle."
+  exec gradle "$@"
+fi
+
+echo "ERROR: gradle-wrapper.jar not found and no system Gradle on PATH."
+echo "Either run: gradle -p android-app wrapper"
+echo "Or install Gradle and retry."
+exit 1
