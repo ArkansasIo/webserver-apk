@@ -4,7 +4,7 @@ setlocal
 set OUTPUT_DIR=output
 if not exist "%OUTPUT_DIR%" mkdir "%OUTPUT_DIR%"
 
-echo [1/3] Starting web server stack with Docker Compose...
+echo [1/4] Starting web server stack with Docker Compose...
 docker compose up --build -d
 if errorlevel 1 (
   echo Docker Compose failed.
